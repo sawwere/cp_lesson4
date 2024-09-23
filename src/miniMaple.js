@@ -1,17 +1,12 @@
 class MiniMaple{
-    diff(equationString, variableName) {
+    diff(equationString, variableName = "x") {
         if (equationString === "") 
             return "";
-        const patternNonVariables = new RegExp(String.raw`(?<=\+|\-|^)(\d+)((\*[^${variableName}](\^\d+)?)*)(\+|\-|$)`, "g");
+        const patternNonVariables = new RegExp(String.raw`(?<=\+|\-|^)(\d+|([^${variableName}])(\^\d+)?)((\*[^${variableName}](\^\d+)?)*)(\+|\-|$)`, "g");
 
         equationString = equationString.replaceAll(patternNonVariables, function() {
-            //console.log(arguments)
-            let g2 = Object.values(arguments)[2]; // latin character multipliers
-            let g5 = Object.values(arguments)[5]; // next operation. example:    ...+52-...    ->    -
-            if (g2 !== "") {
-                return "";
-            }
-            return g5 === "-" ? "-" : "";
+            let g7 = Object.values(arguments)[7]; // next operation. example:    ...+52-...    ->    -
+            return g7 === "-" ? "-" : "";
         });
         const patternVariables = new RegExp(String.raw`(\d+\*)?((\w(\^\d+)?\*)*)(${variableName}(\^\d+)?)((\*\w(\^\d+)?)*)`, "g");
 
@@ -25,7 +20,7 @@ class MiniMaple{
     }
 
     #diffMatch(args, variableName) {
-        console.log(args[2].slice(0, -1));
+        //console.log(args[2].slice(0, -1));
         let group1 = args[1]; // numeric factor
         let group2 = args[2].slice(0, -1); // latin character multipliers before variable
         let group6 = args[6]; // power of variable

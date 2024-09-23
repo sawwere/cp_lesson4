@@ -80,8 +80,12 @@ test('all operations', () => {
 
 test('invalid variable', () => {
     const mm = new MiniMaple();
-    let equation = "4*x^3";
+    let equation = "4*x^3+x";
     let variable = "y";
+    expect(mm.diff(equation, variable)).toBe("0");
+
+    equation = "k*u*x*t+66";
+    variable = "y";
     expect(mm.diff(equation, variable)).toBe("0");
 
     equation = "y+4*x^3";
@@ -114,4 +118,78 @@ test('several variables', () => {
     equation = "16*y^5*h*x*z*t";
     variable = "x";
     expect(mm.diff(equation, variable)).toBe("16*y^5*h*z*t");
+});
+
+test('incorrect polynomial', () => {
+    const mm = new MiniMaple();
+    let equation = "16*y%k";
+    let variable = "x";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4*xx^4";
+    variable = "x";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4*x*aa^4";
+    variable = "x";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4*x^^4";
+    variable = "x";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4*x^x";
+    variable = "x";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4*x^y";
+    variable = "x";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4*x^*4";
+    variable = "x";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4x^4";
+    variable = "x";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4*x^4++5";
+    variable = "x";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4*x1^4";
+    variable = "x";
+    expect(mm.diff(equation, variable)).toThrow();
+});
+
+test('incorrect variableName', () => {
+    const mm = new MiniMaple();
+    let equation = "!4x^4";
+    let variable = "xb";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4x^4";
+    variable = "xb";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4x^4";
+    variable = "5";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4x^4";
+    variable = "X";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4x^4";
+    variable = "я";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4x^4";
+    variable = "";
+    expect(mm.diff(equation, variable)).toThrow();
+
+    equation = "4x^4";
+    variable = "xb";
+    expect(mm.diff(equation, variable)).toThrow();
 });

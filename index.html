@@ -6,16 +6,86 @@
 
     <script src="src/index.js" type="module"></script>
 </head>
+<style>
+    .parent {
+        margin-left: auto;
+        margin-right: auto;
+        border: 2px solid blue;
+    }
+    table {
+        margin: auto;
+        border-collapse: collapse;
+        border-radius: 5px;
+        border: 5px solid coral;
+    }
+    table td {
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 10px;
+        border: 1px solid blueviolet;
+    }
+
+    .max-height {
+        max-height: 5px;
+    }
+
+    .container {
+        display: flex;
+    }
+
+    img {
+        margin: 6px;
+    }
+</style>
+
 
 <body>
-<h1>Implement the symbolic diff here</h1>
-<div id="container">
+
+<div class="parent">
+    <div class="container">
+        <h1>MiniM</h1><img src="apple.jpg" height="64">
+    </div>
+    <table cell>
+        <thead>
+            
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    d
+                </td>
+                <td rowspan="2">
+                    <input type="text" size="50" id="polynomialInput" placeholder="Enter polynomial">
+                </td>
+                <td rowspan="2">
+                    <div>
+                        <button id="demoButton">
+                            =
+                        </button>
+                    </div>
+                </td>
+                <td rowspan="2">
+                    <div id="result">
+                        
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td >
+                    d
+                    <input type="text" id="variableInput"
+                    size="1" 
+                    maxlength="1" minlength="1"  
+                    required="required" value="x">
+                </td>
+            </tr>
+        </tbody>
+        
+    </table>
+    
+    
 
 </div>
-<div>
-    <button id="demoButton">
-        Add something
-    </button>
-</div>
+
 </body>
 </html>
