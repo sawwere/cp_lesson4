@@ -2,7 +2,7 @@ import {MiniMaple} from "../src/miniMaple";
 
 test('empty input', () => {
     const mm = new MiniMaple();
-    expect(mm.diff("","")).toBe("");
+    expect(mm.diff("")).toBe("");
 });
 
 test('single variable', () => {
@@ -37,6 +37,10 @@ test('plus', () => {
     expect(mm.diff(equation, variable)).toBe("1");
 
     equation = "6+x";
+    variable = "x";
+    expect(mm.diff(equation, variable)).toBe("1");
+
+    equation = "+x";
     variable = "x";
     expect(mm.diff(equation, variable)).toBe("1");
 });
@@ -124,72 +128,106 @@ test('incorrect polynomial', () => {
     const mm = new MiniMaple();
     let equation = "16*y%k";
     let variable = "x";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4*xx^4";
     variable = "x";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4*x*aa^4";
     variable = "x";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4*x^^4";
     variable = "x";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4*x^x";
     variable = "x";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4*x^y";
     variable = "x";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4*x^*4";
     variable = "x";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4x^4";
     variable = "x";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4*x^4++5";
     variable = "x";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4*x1^4";
     variable = "x";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 });
 
 test('incorrect variableName', () => {
     const mm = new MiniMaple();
     let equation = "!4x^4";
     let variable = "xb";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4x^4";
     variable = "xb";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4x^4";
     variable = "5";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4x^4";
     variable = "X";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4x^4";
     variable = "я";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4x^4";
     variable = "";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 
     equation = "4x^4";
     variable = "xb";
-    expect(mm.diff(equation, variable)).toThrow();
+    expect(() => {
+        mm.diff(equation, variable)
+    }).toThrow();
 });

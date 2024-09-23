@@ -1,7 +1,18 @@
 class MiniMaple{
     diff(equationString, variableName = "x") {
+        equationString = String(equationString);
+        variableName = String(variableName);
+        if (!variableName.match(/^[a-z]$/))
+            throw new Error("Incorrect variableName");
+
         if (equationString === "") 
             return "";
+        if (!equationString.match(String.raw`^((\+|-|^)(\d+|(\w(\^\d+)?))((\*\w(\^\d+)?)*))*$`))
+            throw new Error("Incorrect polynomial input");
+        if (equationString[0] === "+") {
+            equationString = equationString.slice(1);
+        }
+
         const patternNonVariables = new RegExp(String.raw`(?<=\+|\-|^)(\d+|([^${variableName}])(\^\d+)?)((\*[^${variableName}](\^\d+)?)*)(\+|\-|$)`, "g");
 
         equationString = equationString.replaceAll(patternNonVariables, function() {

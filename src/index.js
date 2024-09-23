@@ -31,10 +31,15 @@ function addSomething(){
         generated = document.createElement('div');
         generated.id='generated';
     }
-    
-    const diffResult = mm.diff(polynomial, variableName);
-
+    let diffResult = "";
+    try {
+        diffResult = mm.diff(polynomial, variableName);
+    }
+    catch (err) {
+        diffResult = err.message;
+    }
     generated.innerHTML = diffResult;
+
     const container = document.getElementById('result');
     container.appendChild(generated);
 }
